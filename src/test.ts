@@ -1,27 +1,34 @@
-import Card from "./card";
-import { CurrencyEnum, Transaction } from "./transactions";
+
+
+
+import {Pocket} from "./pocket";
+import {Card} from "./card";
+
+import {CurrencyEnum} from "./transactions";
+import { BonusCard } from "./bonusCard";
+
+const pocket = new Pocket();
 
 const card = new Card();
+const bonusCard = new BonusCard();
 
-const firstTrans: string = card.addTransaction(1000, CurrencyEnum.USD);
-const SecondTrans: string = card.addTransaction(2222222, CurrencyEnum.UAH);
+pocket.addCard("A", card);
+pocket.addCard("B ", bonusCard);
+console.log(pocket.getCard("A")); 
+console.log(pocket.getCard("B"));
 
-const transactionMain: Transaction | undefined =
-  card.getTransaction(firstTrans);
-if (transactionMain) {
-  console.log(transactionMain.getAmount());
-  console.log(transactionMain.getCurrency());
-}
-const transactionMain2: Transaction | undefined =
-  card.getTransaction(SecondTrans);
-if (transactionMain2) {
-  console.log(transactionMain2.getAmount());
-  console.log(transactionMain2.getCurrency());
-}
+const transactionId1 = card.addTransaction(100, CurrencyEnum.USD);
+const transactionId2 = card.addTransaction(50, CurrencyEnum.USD);
+const transactionId3 = bonusCard.addTransaction(2100, CurrencyEnum.UAH);
+const transactionId4 = bonusCard.addTransaction(5200, CurrencyEnum.UAH);
 
-const usd: number = card.getMoney(CurrencyEnum.USD);
-console.log(usd);
-const uah: number = card.getMoney(CurrencyEnum.UAH);
-console.log(uah);
-console.log(firstTrans);
-console.log(SecondTrans);
+console.log(card.getTransaction(transactionId1)); 
+console.log(card.getTransaction(transactionId2)); 
+console.log(bonusCard.getTransaction(transactionId3)); 
+console.log(bonusCard.getTransaction(transactionId4)); 
+
+console.log(card.getMoney(CurrencyEnum.USD)); 
+console.log(bonusCard.getMoney(CurrencyEnum.UAH)); 
+
+console.log(pocket.totalAmount(CurrencyEnum.USD)); 
+console.log(pocket.totalAmount(CurrencyEnum.UAH))

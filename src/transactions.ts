@@ -4,9 +4,8 @@ export enum CurrencyEnum {
   USD = "USD",
   UAH = "UAH",
 }
-// console.log(CurrencyEnum);
 
-export abstract class Transaction {
+export  class Transaction {
    id: string;
    amount: number;
    currency: CurrencyEnum;
@@ -18,6 +17,10 @@ export abstract class Transaction {
   getId(): string {
     return this.id;
   }
-  abstract getAmount(): number;
-  abstract getCurrency():CurrencyEnum;
+   getAmount(): number {
+    return this.amount
+   }
+   getCurrency():CurrencyEnum {
+    return this.currency
+   }
 }
